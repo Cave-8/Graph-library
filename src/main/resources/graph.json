@@ -1,0 +1,14 @@
+{
+  "vertexesList": [{
+    "node1" : {
+      "id" : "0",
+      "value": "0"
+    }}],
+  "edgesList": [{
+    "edge1" : {
+      "startingVertex" : "0",
+      "endingVertex" : "1",
+      "weight" : "0"
+    }
+  }]
+}

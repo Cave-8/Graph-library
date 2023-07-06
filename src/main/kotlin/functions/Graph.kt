@@ -1,20 +1,20 @@
 package functions
 
-import nodeAndEdges.Node
+import nodeAndEdges.Vertex
 
 /**
  * Graph utilities
  */
 class Graph : GraphFunctions {
-    override fun adjacent(firstVertex: Node, secondVertex: Node) {
+    override fun adjacent(firstVertex: Vertex, secondVertex: Vertex) {
         TODO("Not yet implemented")
     }
 
-    override fun addVertex(vertex: Node) {
+    override fun addVertex(vertex: Vertex) {
         TODO("Not yet implemented")
     }
 
-    override fun removeVertex(vertex: Node) {
+    override fun removeVertex(vertex: Vertex) {
         TODO("Not yet implemented")
     }
 

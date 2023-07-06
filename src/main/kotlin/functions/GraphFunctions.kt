@@ -1,6 +1,6 @@
 package functions
 
-import nodeAndEdges.Node
+import nodeAndEdges.Vertex
 
 /**
  * Shows available methods for graphs
@@ -14,8 +14,8 @@ interface GraphFunctions {
      * @return true if and only if the two vertexes exist and are connected
      */
     fun adjacent(
-        firstVertex: Node,
-        secondVertex: Node,
+        firstVertex: Vertex,
+        secondVertex: Vertex,
     )
 
     /**
@@ -24,7 +24,7 @@ interface GraphFunctions {
      * @return true if operation was successful
      */
     fun addVertex (
-        vertex: Node,
+        vertex: Vertex,
     )
 
     /**
@@ -33,7 +33,7 @@ interface GraphFunctions {
      * @return true if operation was successful
      */
     fun removeVertex (
-        vertex: Node
+        vertex: Vertex
     )
 
     fun addEdge (
