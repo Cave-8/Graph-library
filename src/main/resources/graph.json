@@ -1,14 +1,53 @@
 {
-  "vertexesList": [{
-    "node1" : {
-      "id" : "0",
-      "value": "0"
-    }}],
-  "edgesList": [{
-    "edge1" : {
-      "startingVertex" : "0",
-      "endingVertex" : "1",
-      "weight" : "0"
+  "vertexesList": [
+    {
+      "id" : "0"
+    },
+    {
+      "id" : "1"
+    },
+    {
+      "id" : "2"
+    },
+    {
+      "id" : "3"
     }
-  }]
+  ],
+  "edgesList": [
+    {
+      "startingVertexId" : "0",
+      "endingVertexId" : "1",
+      "weight" : "1"
+    },
+    {
+      "startingVertexId" : "1",
+      "endingVertexId" : "0",
+      "weight" : "3"
+    },
+    {
+      "startingVertexId" : "3",
+      "endingVertexId" : "3",
+      "weight" : "1"
+    },
+    {
+      "startingVertexId" : "2",
+      "endingVertexId" : "0",
+      "weight" : "5"
+    },
+    {
+      "startingVertexId" : "0",
+      "endingVertexId" : "0",
+      "weight" : "1"
+    },
+    {
+      "startingVertexId" : "3",
+      "endingVertexId" : "2",
+      "weight" : "8"
+    },
+    {
+      "startingVertexId" : "1",
+      "endingVertexId" : "1",
+      "weight" : "1"
+    }
+  ]
 }

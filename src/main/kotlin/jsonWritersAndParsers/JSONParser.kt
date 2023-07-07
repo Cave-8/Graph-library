@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import nodeAndEdges.Edge
 import nodeAndEdges.Vertex
+import java.io.File
 
 class JSONParser {
 
@@ -17,6 +18,24 @@ class JSONParser {
          */
         fun allVertexes() : ArrayList<Vertex> {
             val jsonInput = this::class.java.classLoader.getResource("graph.json")?.readText()
+            val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
+            val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
+            val vertexesListToReturn: ArrayList<Vertex> = arrayListOf()
+
+            for (vl in vertexesList) {
+                val vertex: Vertex = Gson().fromJson(vl, Vertex::class.java)
+                vertexesListToReturn.add(vertex)
+            }
+
+            return vertexesListToReturn
+        }
+
+        /**
+         * Return an ArrayList containing all vertexes (from path)
+         * @return ArrayList containing all vertexes
+         */
+        fun allVertexes(path: String) : ArrayList<Vertex> {
+            val jsonInput = File(path).toString()
             val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
             val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
             val vertexesListToReturn: ArrayList<Vertex> = arrayListOf()
@@ -48,26 +67,22 @@ class JSONParser {
         }
 
         /**
-         * Return vertex with id and value if present, otherwise it returns null
-         * @param idToFind is vertex id
-         * @param valueToFind is vertex value
-         * @return vertex with id and value if present, otherwise it returns null
+         * Return an ArrayList containing all edges (from path)
+         * @return ArrayList containing all edges
          */
-        fun searchVertex(idToFind: Int, valueToFind: Int) : Vertex {
-            return allVertexes().first {vertex ->  vertex.id == idToFind && vertex.value == valueToFind }
-        }
+        fun allEdges(path: String) : ArrayList<Edge> {
+            val jsonInput = File(path).toString()
+            val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
+            val edgesList: JsonArray = jsonObject.getAsJsonArray("edgesList")
+            val edgesListToReturn: ArrayList<Edge> = arrayListOf()
 
-        /**
-         * Return edge connecting starting and ending vertex (if exists)
-         * @param startingVertexIdToFind is starting vertex
-         * @param endingVertexIdToFind is ending vertex
-         * @return edge connecting starting and ending vertex (if exists), otherwise it returns null
-         */
-        fun searchEdge(startingVertexIdToFind: Int, endingVertexIdToFind: Int) : Edge {
-            return allEdges().first {edge ->  edge.startingVertexId == startingVertexIdToFind && edge.endingVertexId == endingVertexIdToFind}
+            for (e in edgesList) {
+                val edge: Edge = Gson().fromJson(e, Edge::class.java)
+                edgesListToReturn.add(edge)
+            }
+
+            return edgesListToReturn
         }
     }
-
-
 }
 

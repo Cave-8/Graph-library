@@ -14,14 +14,20 @@ internal class JSONParserTest {
     @Test
     fun testParsingVertexes () {
         val jsonInput = this::class.java.classLoader.getResource("graph.json")?.readText()
+        Assertions.assertNotNull(jsonInput)
+
         val jsonObject: JsonObject = parseString(jsonInput) as JsonObject
+        Assertions.assertNotNull(jsonObject)
+        println(jsonObject)
+
         val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
 
         for (vl in vertexesList) {
             val vertex: Vertex = Gson().fromJson(vl, Vertex::class.java)
             Assertions.assertNotNull(vertex.id)
-            Assertions.assertNotNull(vertex.value)
         }
+
+        println(vertexesList)
     }
 
     @Test
@@ -36,5 +42,7 @@ internal class JSONParserTest {
             Assertions.assertNotNull(edge.endingVertexId)
             Assertions.assertNotNull(edge.weight)
         }
+
+        println(edgesList)
     }
 }

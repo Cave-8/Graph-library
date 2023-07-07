@@ -1,4 +1,4 @@
 package nodeAndEdges
 
-class Vertex(val id: Int, val value: Int) {
+class Vertex(var id: Int) {
 }
