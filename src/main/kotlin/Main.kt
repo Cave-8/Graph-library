@@ -14,7 +14,7 @@ fun main() {
     /**
      * Main graph
      */
-    val appGraph: Graph
+    var appGraph: Graph
 
     println("Welcome to graph lib!")
     println("Insert path of file or leave empty to read from example")
@@ -41,9 +41,10 @@ fun main() {
     while (true) {
         println("Available options: ")
         println("1: Print graph")
-        println("2: Delete graph")
-        println("3: Search value in graph")
-        println("4: Exit")
+        println("2: Add vertex")
+        println("3: Add edge")
+        println("4: Find shortest path between two vertexes")
+        println("5: Exit")
 
         val choice: Int = Integer.valueOf(readln())
         when (choice) {
@@ -51,12 +52,17 @@ fun main() {
                 appGraph.adjMat.printMatrix()
             }
             2 -> {
-
+                appGraph.addVertex(path)
+                appGraph.adjMat = AdjacencyMatrix(appGraph.vertexes, appGraph.edges)
+                appGraph.adjMat.fillMatrix()
             }
             3 -> {
 
             }
             4 -> {
+
+            }
+            5 -> {
                 println("Goodbye!")
                 exitProcess(0)
             }

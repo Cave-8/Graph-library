@@ -6,7 +6,7 @@ import nodeAndEdges.Vertex
 /**
  * Contains matrix, first row and column contain indices and every Matrix[i,j] contains weight of arch connecting i -> j, if it doesn't exist -1 is shown
  */
-class AdjacencyMatrix(val Vertexes: ArrayList<Vertex>, val Edges: ArrayList<Edge>) {
+class AdjacencyMatrix(var Vertexes: ArrayList<Vertex>, var Edges: ArrayList<Edge>) {
 
     var matrix = Matrix(Vertexes.size + 1, Vertexes.size + 1)
 

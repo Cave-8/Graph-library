@@ -20,43 +20,20 @@ interface GraphFunctions {
 
     /**
      * Add vertex to graph
-     * @param vertex is vertex to add
+     * @param path is file path
      * @return true if operation was successful
      */
     fun addVertex (
-        vertex: Vertex,
-    ): Boolean
-
-    /**
-     * Remove vertex from graph
-     * @param vertex is vertex to add
-     * @return true if operation was successful
-     */
-    fun removeVertex (
-        vertex: Vertex
+        path: String
     ): Boolean
 
     /**
      * Add edge to graph
      * @param startingVertex is starting vertex
-     * @param endingVertex is ending vertex
-     * @param weight is edge's weight
+     * @param path is file path
      * @return true if operation was successful
      */
     fun addEdge (
-        startingVertex: Vertex,
-        endingVertex: Vertex,
-        weight: Int,
-    ): Boolean
-
-    /**
-     * Add edge to graph
-     * @param startingVertex is starting vertex
-     * @param endingVertex is ending vertex
-     * @return true if operation was successful
-     */
-    fun removeEdge (
-        startingVertex: Vertex,
-        endingVertex: Vertex,
+        path: String
     ): Boolean
 }

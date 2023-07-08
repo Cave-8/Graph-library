@@ -1,12 +1,13 @@
 package functions
 
+import jsonWritersAndParsers.JSONWriter
 import nodeAndEdges.Edge
 import nodeAndEdges.Vertex
 
 /**
  * Graph utilities
  */
-class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, val adjMat: AdjacencyMatrix) : GraphFunctions {
+class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, var adjMat: AdjacencyMatrix) : GraphFunctions {
 
     /**
      * Check if two vertexes are connected
@@ -20,47 +21,77 @@ class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, val adj
 
     /**
      * Add vertex to graph
-     * @param vertex is vertex to add
-     * @return true if operation was successful
+     * @param path is file path
+     * @return true if operation was successful, otherwise it returns false
      */
-    override fun addVertex(vertex: Vertex): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun addVertex(path: String): Boolean {
+        val id: Int
+        try {
+            println("Insert id for vertex (must be a number)")
+            println(">")
+            id = readln().toInt()
+            val vertex = Vertex(id)
 
-    /**
-     * Remove vertex from graph
-     * @param vertex is vertex to add
-     * @return true if operation was successful
-     */
-    override fun removeVertex(vertex: Vertex): Boolean {
-        TODO("Not yet implemented")
+            if (vertexes.map{e -> e.id}.contains(id)) {
+                println("Vertex already exists")
+            }
+            else
+            {
+                vertexes.add(vertex)
+                JSONWriter.addVertex(vertex, path)
+                println("Insertion complete!")
+            }
+        } catch (e: NumberFormatException)
+        {
+            println("Please insert a valid number")
+            return false
+        }
+        return true
     }
 
     /**
      * Add edge to graph
-     * @param startingVertex is starting vertex
-     * @param endingVertex is ending vertex
-     * @param weight is edge's weight
+     * @param path is file path
      * @return true if operation was successful
      */
-    override fun addEdge(startingVertex: Vertex, endingVertex: Vertex, weight: Int): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun addEdge(path: String): Boolean {
+        val idS: Int
+        val idE: Int
+        val weight: Int
 
-    /**
-     * Add edge to graph
-     * @param startingVertex is starting vertex
-     * @param endingVertex is ending vertex
-     * @return true if operation was successful
-     */
-    override fun removeEdge(startingVertex: Vertex, endingVertex: Vertex): Boolean {
-        TODO("Not yet implemented")
-    }
+        try {
+            println("Insert id for startingVertex (must be a number)")
+            println(">")
+            idS = readln().toInt()
 
-    /**
-     * Build adjacency matrix
-     */
-    fun buildGraph() {
+            if (!vertexes.map{e -> e.id}.contains(idS)) {
+                println("Vertex doesn't exists")
+                return false
+            }
 
+            println("Insert id of endingVertex (must be a number)")
+            println(">")
+            idE = readln().toInt()
+
+            if (!vertexes.map{e -> e.id}.contains(idE)) {
+                println("Vertex doesn't exists")
+                return false
+            }
+
+            println("Insert weight")
+            println(">")
+            weight = readln().toInt()
+
+            val edge = Edge(idS, idE, weight)
+
+            edges.add(edge)
+            JSONWriter.addEdge(edge, path)
+            println("Insertion complete!")
+        } catch (e: NumberFormatException)
+        {
+            println("Please insert a valid number")
+            return false
+        }
+        return true
     }
 }

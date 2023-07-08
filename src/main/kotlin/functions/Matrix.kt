@@ -1,6 +1,6 @@
 package functions
 
-class Matrix (val row: Int, val col: Int) {
+class Matrix (var row: Int, var col: Int) {
 
     /**
      * Get value for i row and j column
