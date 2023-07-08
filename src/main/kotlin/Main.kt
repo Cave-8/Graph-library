@@ -14,7 +14,7 @@ fun main() {
     /**
      * Main graph
      */
-    var appGraph: Graph
+    val appGraph: Graph
 
     println("Welcome to graph lib!")
     println("Insert path of file or leave empty to read from example")
@@ -53,11 +53,9 @@ fun main() {
             }
             2 -> {
                 appGraph.addVertex(path)
-                appGraph.adjMat = AdjacencyMatrix(appGraph.vertexes, appGraph.edges)
-                appGraph.adjMat.fillMatrix()
             }
             3 -> {
-
+                appGraph.addEdge(path)
             }
             4 -> {
 

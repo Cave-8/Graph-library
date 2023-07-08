@@ -20,7 +20,7 @@ class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, var adj
     }
 
     /**
-     * Add vertex to graph
+     * Add vertex to graph and refresh adjacency matrix
      * @param path is file path
      * @return true if operation was successful, otherwise it returns false
      */
@@ -39,6 +39,8 @@ class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, var adj
             {
                 vertexes.add(vertex)
                 JSONWriter.addVertex(vertex, path)
+                adjMat = AdjacencyMatrix(vertexes, edges)
+                adjMat.fillMatrix()
                 println("Insertion complete!")
             }
         } catch (e: NumberFormatException)
@@ -50,7 +52,7 @@ class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, var adj
     }
 
     /**
-     * Add edge to graph
+     * Add edge to graph and refresh adjacency matrix
      * @param path is file path
      * @return true if operation was successful
      */
@@ -86,6 +88,8 @@ class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, var adj
 
             edges.add(edge)
             JSONWriter.addEdge(edge, path)
+            adjMat = AdjacencyMatrix(vertexes, edges)
+            adjMat.fillMatrix()
             println("Insertion complete!")
         } catch (e: NumberFormatException)
         {
