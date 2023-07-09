@@ -13,7 +13,7 @@ class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges
     /**
      * Fill Matrix with Vertexes and Edges lists
      */
-    fun fillMatrix () {
+    fun fillMatrix() {
         var i = 0
         var j = 0
 
@@ -40,7 +40,8 @@ class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges
             while (j < Vertexes.size + 1) {
 
                 if (i != 0 && j != 0) {
-                    val edge = Edges.firstOrNull { e -> e.startingVertexId == matrix[i, 0] && e.endingVertexId == matrix[0, j] }
+                    val edge =
+                        Edges.firstOrNull { e -> e.startingVertexId == matrix[i, 0] && e.endingVertexId == matrix[0, j] }
 
                     if (edge != null)
                         matrix[i, j] = edge.weight
@@ -56,32 +57,61 @@ class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges
     }
 
     /**
-     * Print Matrix
+     * Print Graph
+     * @param type is 1 if you want to print in matrix form, 2 if you want to print in list form
      */
-    fun printMatrix() {
+    fun printGraph(type: Int) {
 
-        var i = 0
-        var j = 0
+        when (type) {
+            1 -> {
+                var i = 0
+                var j = 0
 
-        while (i < Vertexes.size + 1) {
-            while (j < Vertexes.size + 1) {
+                while (i < Vertexes.size + 1) {
+                    while (j < Vertexes.size + 1) {
 
-                if (i == 0 && j == 0) {
-                    print("X   ")
+                        if (i == 0 && j == 0) {
+                            print("X   ")
+                        } else {
+                            if (matrix[i, j] != -1)
+                                print("${matrix[i, j]}   ")
+                            else
+                                print("-   ")
+                        }
+                        j++
+                    }
+                    print("\n\n")
+                    j = 0
+                    i++
                 }
-                else
-                {
-                    if (matrix[i, j] != -1)
-                        print("${matrix[i, j]}   ")
-                    else
-                        print("-   ")
-                }
-                j++
             }
-            print("\n\n")
-            j = 0
-            i++
+
+            2 -> {
+                var i = 1
+                var j = 1
+                var printed = false
+
+                while (i < Vertexes.size + 1) {
+                    while (j < Vertexes.size + 1) {
+                        if (matrix[i, j] != -1) {
+                            printed = true
+                            print("${matrix[i, 0]}")
+                            print(" -(${matrix[i, j]})-> ${matrix[0, j]}")
+                            println()
+                        }
+                        j++
+                    }
+                    if (!printed) {
+                        print("${matrix[i, 0]}")
+                        println()
+                    }
+
+                    j = 1
+                    printed = false
+                    i++
+                }
+            }
+            else -> println("Unrecognized printing mode")
         }
     }
-
 }

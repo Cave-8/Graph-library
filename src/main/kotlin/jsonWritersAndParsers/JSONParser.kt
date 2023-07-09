@@ -4,6 +4,8 @@ import com.google.gson.*
 import nodeAndEdges.Edge
 import nodeAndEdges.Vertex
 import java.io.File
+import java.io.FileNotFoundException
+import kotlin.system.exitProcess
 
 class JSONParser {
 
@@ -13,7 +15,7 @@ class JSONParser {
          * Return an ArrayList containing all vertexes
          * @return ArrayList containing all vertexes
          */
-        fun allVertexes() : ArrayList<Vertex> {
+        fun allVertexes(): ArrayList<Vertex> {
             val jsonInput = this::class.java.classLoader.getResource("graph.json")?.readText()
             val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
             val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
@@ -31,26 +33,31 @@ class JSONParser {
          * Return an ArrayList containing all vertexes (from path)
          * @return ArrayList containing all vertexes
          */
-        fun allVertexes(path: String) : ArrayList<Vertex> {
-            val jsonInput = File(path).readText()
-            val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
-            val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
-            val vertexesListToReturn: ArrayList<Vertex> = arrayListOf()
+        fun allVertexes(path: String): ArrayList<Vertex> {
+            try {
+                val jsonInput = File(path).readText()
+                val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
+                val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
+                val vertexesListToReturn: ArrayList<Vertex> = arrayListOf()
 
-            for (vl in vertexesList) {
-                val gson = GsonBuilder().setLenient().create()
-                val vertex: Vertex = gson.fromJson(vl, Vertex::class.java)
-                vertexesListToReturn.add(vertex)
+                for (vl in vertexesList) {
+                    val gson = GsonBuilder().setLenient().create()
+                    val vertex: Vertex = gson.fromJson(vl, Vertex::class.java)
+                    vertexesListToReturn.add(vertex)
+                }
+
+                return vertexesListToReturn
+            } catch (e: FileNotFoundException) {
+                println("File not found, relaunch and retry")
+                exitProcess(-1)
             }
-
-            return vertexesListToReturn
         }
 
         /**
          * Return an ArrayList containing all edges
          * @return ArrayList containing all edges
          */
-        fun allEdges() : ArrayList<Edge> {
+        fun allEdges(): ArrayList<Edge> {
             val jsonInput = this::class.java.classLoader.getResource("graph.json")?.readText()
             val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
             val edgesList: JsonArray = jsonObject.getAsJsonArray("edgesList")
@@ -68,19 +75,24 @@ class JSONParser {
          * Return an ArrayList containing all edges (from path)
          * @return ArrayList containing all edges
          */
-        fun allEdges(path: String) : ArrayList<Edge> {
-            val jsonInput = File(path).readText()
-            val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
-            val edgesList: JsonArray = jsonObject.getAsJsonArray("edgesList")
-            val edgesListToReturn: ArrayList<Edge> = arrayListOf()
+        fun allEdges(path: String): ArrayList<Edge> {
+            try {
+                val jsonInput = File(path).readText()
+                val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
+                val edgesList: JsonArray = jsonObject.getAsJsonArray("edgesList")
+                val edgesListToReturn: ArrayList<Edge> = arrayListOf()
 
-            for (e in edgesList) {
-                val gson = GsonBuilder().setLenient().create()
-                val edge: Edge = gson.fromJson(e, Edge::class.java)
-                edgesListToReturn.add(edge)
+                for (e in edgesList) {
+                    val gson = GsonBuilder().setLenient().create()
+                    val edge: Edge = gson.fromJson(e, Edge::class.java)
+                    edgesListToReturn.add(edge)
+                }
+
+                return edgesListToReturn
+            } catch (e: FileNotFoundException) {
+                println("File not found, relaunch and retry")
+                exitProcess(-1)
             }
-
-            return edgesListToReturn
         }
     }
 }

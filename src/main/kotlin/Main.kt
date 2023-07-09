@@ -40,25 +40,29 @@ fun main() {
 
     while (true) {
         println("Available options: ")
-        println("1: Print graph")
-        println("2: Add vertex")
-        println("3: Add edge")
-        println("4: Find if two vertexes are connected")
-        println("5: Find shortest path between two vertexes")
-        println("6: Find if an eulerian path exists and eventually print it")
-        println("7: Exit")
+        println("1: Print graph in matrix form")
+        println("2: Print graph in list form")
+        println("3: Add vertex")
+        println("4: Add edge")
+        println("5: Find if two vertexes are connected")
+        println("6: Find shortest path between two vertexes")
+        println("7: Find if an eulerian path exists and eventually print it")
+        println("8: Exit")
 
         when (Integer.valueOf(readln())) {
             1 -> {
-                appGraph.adjMat.printMatrix()
+                appGraph.adjMat.printGraph(1)
             }
             2 -> {
-                appGraph.addVertex(path)
+                appGraph.adjMat.printGraph(2)
             }
             3 -> {
-                appGraph.addEdge(path)
+                appGraph.addVertex(path)
             }
             4 -> {
+                appGraph.addEdge(path)
+            }
+            5 -> {
                 try {
                     println("Insert id of starting vertex")
                     println(">")
@@ -74,13 +78,13 @@ fun main() {
                     println("Please insert a valid number")
                 }
             }
-            5 -> {
-
-            }
             6 -> {
 
             }
             7 -> {
+
+            }
+            8 -> {
                 println("Goodbye!")
                 exitProcess(0)
             }
