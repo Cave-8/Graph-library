@@ -1,0 +1,39 @@
+{
+  "vertexesList": [
+    {
+      "id": "0"
+    },
+    {
+      "id": "1"
+    },
+    {
+      "id": "2"
+    },
+    {
+      "id": "3"
+    }
+
+  ],
+  "edgesList": [
+    {
+      "startingVertexId": "0",
+      "endingVertexId": "1",
+      "weight": "1"
+    },
+    {
+      "startingVertexId": "1",
+      "endingVertexId": "2",
+      "weight": "1"
+    },
+    {
+      "startingVertexId": "2",
+      "endingVertexId": "3",
+      "weight": "1"
+    },
+    {
+      "startingVertexId": "3",
+      "endingVertexId": "0",
+      "weight": "1"
+    }
+  ]
+}

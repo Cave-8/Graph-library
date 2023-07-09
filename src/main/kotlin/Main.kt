@@ -82,7 +82,7 @@ fun main() {
 
             }
             7 -> {
-
+                appGraph.eulerianPath()
             }
             8 -> {
                 println("Goodbye!")

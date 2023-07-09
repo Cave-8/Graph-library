@@ -36,12 +36,9 @@ interface GraphFunctions {
 
     /**
      * Check if an eulerian path exists and eventually print it
-     * @param graph is analyzed graph
      * @return true if eulerian path exists, otherwise it returns false
      */
-    fun ePath (
-        graph: Graph
-    ): Boolean
+    fun eulerianPath (): Boolean
 
     /**
      * Print shortest path between two vertexes

@@ -3,6 +3,7 @@ package functions
 import jsonWritersAndParsers.JSONWriter
 import nodeAndEdges.Edge
 import nodeAndEdges.Vertex
+import java.util.*
 
 /**
  * Graph utilities
@@ -131,11 +132,126 @@ class Graph(private val vertexes: ArrayList<Vertex>, private val edges: ArrayLis
 
     /**
      * Check if an eulerian path exists and eventually print it
-     * @param graph is analyzed graph
      * @return true if eulerian path exists, otherwise it returns false
      */
-    override fun ePath(graph: Graph): Boolean {
-        TODO("Not yet implemented")
+    override fun eulerianPath(): Boolean {
+        class VertexEnteringExiting(val id: Int, var ent: Int, var exit: Int) {
+        }
+
+        val list = Stack<VertexEnteringExiting>()
+
+        for (v in vertexes) {
+            val newVEE = VertexEnteringExiting(v.id, 0, 0)
+            list.push(newVEE)
+        }
+
+        var i = 1
+        var j = 1
+
+        while (i < vertexes.size + 1)
+        {
+            while (j < vertexes.size + 1) {
+                if (adjMat.matrix[i, j] != -1) {
+                    list.filter { e -> e.id == adjMat.matrix[i, 0]  }.first().exit++
+                    list.filter { e -> e.id == adjMat.matrix[0, j]  }.first().ent++
+                }
+                j++
+            }
+            j = 1
+            i++
+        }
+
+        if (list.count { e -> e.ent - e.exit == 0 } == vertexes.size)
+        {
+            println("An eulerian path exists, I.E.")
+
+            val tPath = Stack<Int>()
+            val ePath = Stack<Int>()
+            val allVertexes = ArrayList<Int> ()
+            val matrix = adjMat.matrix
+
+            for (vee in list) {
+                val outgoing = vee.exit
+                var count = 0
+                while (count < outgoing) {
+                    allVertexes.add(vee.id)
+                    count++
+                }
+            }
+
+            tPath.push(allVertexes.removeAt(0))
+            Hierholzer(tPath, ePath, matrix, allVertexes)
+        }
+        else if (list.count { e -> e.ent - e.exit == 1 } == 1 && list.count { e -> e.ent - e.exit == -1 } == 1)
+        {
+            println("An eulerian path exists, I.E.")
+
+            val tPath = Stack<Int>()
+            val ePath = Stack<Int>()
+            val allVertexes = ArrayList<Int> ()
+            val matrix = adjMat.matrix
+
+            for (vee in list) {
+                val outgoing = vee.exit
+                var count = 0
+                while (count < outgoing) {
+                    allVertexes.add(vee.id)
+                    count++
+                }
+            }
+            tPath.push(allVertexes.removeAt(allVertexes.indexOf(list.filter{e -> e.ent - e.exit == -1}.map { e -> e.id }.first())))
+            Hierholzer(tPath, ePath, matrix, allVertexes)
+        }
+        else
+            println("An eulerian path doesn't exist")
+
+        return true
+    }
+
+    /**
+     * Hierholzer's algorithm
+     * @param tPath
+     * @param ePath
+     * @param matrix is adjacency matrix
+     * @param allVertexes contains id of vertexes
+     */
+    fun Hierholzer (tPath: Stack<Int>, ePath: Stack<Int>, matrix: Matrix, allVertexes: ArrayList<Int>) {
+        while (tPath.isNotEmpty()) {
+            val curr = tPath.peek()
+            var row = 1
+            var col = 1
+
+            while (row < vertexes.size + 1) {
+                if (matrix[row, 0] == curr)
+                    break
+                row++
+            }
+
+            while (col < vertexes.size + 1) {
+                if (matrix[row, col] != -1) {
+                    matrix[row, col] = -1
+                    tPath.push(matrix[0, col])
+                    try {allVertexes.removeAt(allVertexes.indexOf(matrix[0, col]))} catch (_: IndexOutOfBoundsException) {}
+                    break
+                }
+                if (col == vertexes.size) {
+                    ePath.push(tPath.pop())
+                }
+                col++
+            }
+        }
+
+        print("${ePath.peek()} -> ")
+        ePath.pop()
+        while (ePath.isNotEmpty()) {
+            print("${ePath.peek()}")
+            ePath.pop()
+            if (ePath.isNotEmpty()) {
+                print(" -> ")
+            }
+            else
+                println()
+        }
     }
 
     /**
