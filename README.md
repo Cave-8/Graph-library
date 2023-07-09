@@ -1,21 +1,21 @@
 # Graph-library
-Small utility for graph analysis.
-Graphs are read from JSON file using following structures:
-{
-  vertexesList: [
-    {
-      id = 0
-    }
-  ]
-  edgesList: [ 
-    {
-    startingVertexId = 0
-    endingVertexId = 0
-    weight = 0
-    }
-  ]
-}
-Some examples are available inside project (in exampleJSON folder).
+Small utility for graph analysis.  
+Graphs are read from JSON file using following structures:  
+{  
+  vertexesList: [  
+    {  
+      id = 0  
+    }  
+  ]  
+  edgesList: [   
+    {  
+    startingVertexId = 0  
+    endingVertexId = 0  
+    weight = 0  
+    }  
+  ]  
+}  
+Some examples are available inside project (in exampleJSON folder).  
 
 # Functionalities
 You can:
