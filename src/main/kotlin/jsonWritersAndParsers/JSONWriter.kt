@@ -19,15 +19,15 @@ class JSONWriter {
         fun addVertex(vertexToAdd: Vertex, path: String) {
             val jsonInput = File(path).readText()
             val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
-            val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
+            val verticesList: JsonArray = jsonObject.getAsJsonArray("verticesList")
             val edgesList: JsonArray = jsonObject.getAsJsonArray("edgesList")
 
             val vertexJSON = Vertex.VertexJSON(vertexToAdd.id.toString())
             val jsonVertex: JsonObject = (JsonParser.parseString(Gson().toJson(vertexJSON))) as JsonObject
-            vertexesList.add(jsonVertex)
+            verticesList.add(jsonVertex)
 
             PrintWriter(File(path)).close()
-            File(path).writeText("{\"vertexesList\": $vertexesList,\"edgesList\":$edgesList}")
+            File(path).writeText("{\"verticesList\": $verticesList,\"edgesList\":$edgesList}")
         }
 
         /**
@@ -36,7 +36,7 @@ class JSONWriter {
         fun addEdge(edgeToAdd: Edge, path: String) {
             val jsonInput = File(path).readText()
             val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
-            val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
+            val verticesList: JsonArray = jsonObject.getAsJsonArray("verticesList")
             val edgesList: JsonArray = jsonObject.getAsJsonArray("edgesList")
 
             val edgeJSON = Edge.EdgeJSON(edgeToAdd.startingVertexId.toString(), edgeToAdd.endingVertexId.toString(), edgeToAdd.weight.toString())
@@ -44,7 +44,7 @@ class JSONWriter {
             edgesList.add(jsonEdge)
 
             PrintWriter(File(path)).close()
-            File(path).writeText("{\"vertexesList\": $vertexesList,\"edgesList\":$edgesList}")
+            File(path).writeText("{\"verticesList\": $verticesList,\"edgesList\":$edgesList}")
         }
     }
 }

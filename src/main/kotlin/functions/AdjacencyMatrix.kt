@@ -6,29 +6,29 @@ import nodeAndEdges.Vertex
 /**
  * Contains matrix, first row and column contain indices and every Matrix[i,j] contains weight of arch connecting i -> j, if it doesn't exist -1 is shown
  */
-class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges: ArrayList<Edge>) {
+class AdjacencyMatrix(private var vertices: ArrayList<Vertex>, private var Edges: ArrayList<Edge>) {
 
-    var matrix = Matrix(Vertexes.size + 1, Vertexes.size + 1)
+    var matrix = Matrix(vertices.size + 1, vertices.size + 1)
 
     /**
-     * Fill Matrix with Vertexes and Edges lists
+     * Fill Matrix with vertices and Edges lists
      */
     fun fillMatrix() {
         var i = 0
         var j = 0
 
         //Filling first row
-        while (j < Vertexes.size) {
+        while (j < vertices.size) {
             if (j != 0) {
-                matrix[0, j] = Vertexes[j].id
+                matrix[0, j] = vertices[j].id
             }
             j++
         }
 
         //Filling first column
-        while (i < Vertexes.size) {
+        while (i < vertices.size) {
             if (i != 0) {
-                matrix[i, 0] = Vertexes[i].id
+                matrix[i, 0] = vertices[i].id
             }
             i++
         }
@@ -36,8 +36,8 @@ class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges
         i = 0
         j = 0
 
-        while (i < Vertexes.size + 1) {
-            while (j < Vertexes.size + 1) {
+        while (i < vertices.size + 1) {
+            while (j < vertices.size + 1) {
 
                 if (i != 0 && j != 0) {
                     val edge =
@@ -67,8 +67,8 @@ class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges
                 var i = 0
                 var j = 0
 
-                while (i < Vertexes.size + 1) {
-                    while (j < Vertexes.size + 1) {
+                while (i < vertices.size + 1) {
+                    while (j < vertices.size + 1) {
 
                         if (i == 0 && j == 0) {
                             print("X   ")
@@ -91,8 +91,8 @@ class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges
                 var j = 1
                 var printed = false
 
-                while (i < Vertexes.size + 1) {
-                    while (j < Vertexes.size + 1) {
+                while (i < vertices.size + 1) {
+                    while (j < vertices.size + 1) {
                         if (matrix[i, j] != -1) {
                             printed = true
                             print("${matrix[i, 0]}")

@@ -22,20 +22,20 @@ fun main() {
     val path: String = readln()
     if (path == "")
     {
-        val vertexes: ArrayList<Vertex> = JSONParser.allVertexes()
+        val vertices: ArrayList<Vertex> = JSONParser.allVertices()
         val edges: ArrayList<Edge> = JSONParser.allEdges()
-        val adjMat = AdjacencyMatrix(vertexes, edges)
+        val adjMat = AdjacencyMatrix(vertices, edges)
         adjMat.fillMatrix()
 
-        appGraph = Graph(vertexes, edges, adjMat)
+        appGraph = Graph(vertices, edges, adjMat)
     }
     else {
-        val vertexes: ArrayList<Vertex> = JSONParser.allVertexes(path)
+        val vertices: ArrayList<Vertex> = JSONParser.allVertices(path)
         val edges: ArrayList<Edge> = JSONParser.allEdges(path)
-        val adjMat = AdjacencyMatrix(vertexes, edges)
+        val adjMat = AdjacencyMatrix(vertices, edges)
         adjMat.fillMatrix()
 
-        appGraph = Graph(vertexes, edges, adjMat)
+        appGraph = Graph(vertices, edges, adjMat)
     }
 
     while (true) {
@@ -44,8 +44,8 @@ fun main() {
         println("2: Print graph in list form")
         println("3: Add vertex")
         println("4: Add edge")
-        println("5: Find if two vertexes are connected")
-        println("6: Find shortest path between two vertexes")
+        println("5: Find if two vertices are connected")
+        println("6: Find shortest path between two vertices")
         println("7: Find if an eulerian path exists and eventually print it")
         println("8: Exit")
 

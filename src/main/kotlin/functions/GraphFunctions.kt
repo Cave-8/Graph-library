@@ -6,10 +6,10 @@ package functions
 interface GraphFunctions {
 
     /**
-     * Check if two vertexes are connected
+     * Check if two  are connected
      * @param firstVertexId is the first vertex id
      * @param secondVertexId is the second vertex id
-     * @return true if and only if the two vertexes exists and are connected
+     * @return true if and only if the two vertices exists and are connected
      */
     fun adjacent(
         firstVertexId: Int,
@@ -41,7 +41,7 @@ interface GraphFunctions {
     fun eulerianPath (): Boolean
 
     /**
-     * Print shortest path between two vertexes
+     * Print shortest path between two vertices
      * @param startingVertexId is id of starting vertex
      * @param endingVertexId is id of ending vertex
      */

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 internal class JSONParserTest {
 
     @Test
-    fun testParsingVertexes () {
+    fun testParsingvertices () {
         val jsonInput = this::class.java.classLoader.getResource("graph.json")?.readText()
         Assertions.assertNotNull(jsonInput)
 
@@ -20,14 +20,14 @@ internal class JSONParserTest {
         Assertions.assertNotNull(jsonObject)
         println(jsonObject)
 
-        val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
+        val verticesList: JsonArray = jsonObject.getAsJsonArray("verticesList")
 
-        for (vl in vertexesList) {
+        for (vl in verticesList) {
             val vertex: Vertex = Gson().fromJson(vl, Vertex::class.java)
             Assertions.assertNotNull(vertex.id)
         }
 
-        println(vertexesList)
+        println(verticesList)
     }
 
     @Test

@@ -12,41 +12,41 @@ class JSONParser {
     companion object {
 
         /**
-         * Return an ArrayList containing all vertexes
-         * @return ArrayList containing all vertexes
+         * Return an ArrayList containing all vertices
+         * @return ArrayList containing all vertices
          */
-        fun allVertexes(): ArrayList<Vertex> {
+        fun allVertices(): ArrayList<Vertex> {
             val jsonInput = this::class.java.classLoader.getResource("graph.json")?.readText()
             val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
-            val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
-            val vertexesListToReturn: ArrayList<Vertex> = arrayListOf()
+            val verticesList: JsonArray = jsonObject.getAsJsonArray("verticesList")
+            val verticesListToReturn: ArrayList<Vertex> = arrayListOf()
 
-            for (vl in vertexesList) {
+            for (vl in verticesList) {
                 val vertex: Vertex = Gson().fromJson(vl, Vertex::class.java)
-                vertexesListToReturn.add(vertex)
+                verticesListToReturn.add(vertex)
             }
 
-            return vertexesListToReturn
+            return verticesListToReturn
         }
 
         /**
-         * Return an ArrayList containing all vertexes (from path)
-         * @return ArrayList containing all vertexes
+         * Return an ArrayList containing all vertices (from path)
+         * @return ArrayList containing all vertices
          */
-        fun allVertexes(path: String): ArrayList<Vertex> {
+        fun allVertices(path: String): ArrayList<Vertex> {
             try {
                 val jsonInput = File(path).readText()
                 val jsonObject: JsonObject = JsonParser.parseString(jsonInput) as JsonObject
-                val vertexesList: JsonArray = jsonObject.getAsJsonArray("vertexesList")
-                val vertexesListToReturn: ArrayList<Vertex> = arrayListOf()
+                val verticesList: JsonArray = jsonObject.getAsJsonArray("verticesList")
+                val verticesListToReturn: ArrayList<Vertex> = arrayListOf()
 
-                for (vl in vertexesList) {
+                for (vl in verticesList) {
                     val gson = GsonBuilder().setLenient().create()
                     val vertex: Vertex = gson.fromJson(vl, Vertex::class.java)
-                    vertexesListToReturn.add(vertex)
+                    verticesListToReturn.add(vertex)
                 }
 
-                return vertexesListToReturn
+                return verticesListToReturn
             } catch (e: FileNotFoundException) {
                 println("File not found, relaunch and retry")
                 exitProcess(-1)
