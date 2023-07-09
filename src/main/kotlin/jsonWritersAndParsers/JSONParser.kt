@@ -5,9 +5,6 @@ import nodeAndEdges.Edge
 import nodeAndEdges.Vertex
 import java.io.File
 
-
-
-
 class JSONParser {
 
     companion object {

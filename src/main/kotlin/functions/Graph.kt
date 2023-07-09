@@ -17,17 +17,26 @@ class Graph(private val vertexes: ArrayList<Vertex>, private val edges: ArrayLis
      */
     override fun adjacent(firstVertexId: Int, secondVertexId: Int): Boolean {
 
-        if (vertexes.map { e -> e.id }.contains(firstVertexId)) {
+        if (!vertexes.map { e -> e.id }.contains(firstVertexId)) {
             println("First vertex doesn't exist")
             return false
         }
-        if (vertexes.map { e -> e.id }.contains(secondVertexId)) {
+        if (!vertexes.map { e -> e.id }.contains(secondVertexId)) {
             println("Second vertex doesn't exist")
             return false
         }
 
-        return if (adjMat.matrix[firstVertexId, secondVertexId] != -1) {
-            println("Vertexes are connected with weight ${adjMat.matrix[firstVertexId, secondVertexId]}")
+        var safeFirstVertexId = firstVertexId
+        var safeSecondVertexId = secondVertexId
+
+        if (firstVertexId == 0) {
+            safeFirstVertexId = vertexes.size }
+        if (secondVertexId == 0) {
+            safeSecondVertexId = vertexes.size }
+
+
+        return if (adjMat.matrix[safeFirstVertexId, safeSecondVertexId] != -1) {
+            println("Vertexes are connected with weight ${adjMat.matrix[safeFirstVertexId, safeSecondVertexId]}")
             true
         } else {
             println("Vertexes are not connected")
