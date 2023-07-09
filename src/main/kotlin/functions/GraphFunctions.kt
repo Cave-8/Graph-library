@@ -1,7 +1,5 @@
 package functions
 
-import nodeAndEdges.Vertex
-
 /**
  * Shows available methods for graphs
  */
@@ -9,13 +7,13 @@ interface GraphFunctions {
 
     /**
      * Check if two vertexes are connected
-     * @param firstVertex is the first vertex
-     * @param secondVertex is the second vertex
+     * @param firstVertexId is the first vertex id
+     * @param secondVertexId is the second vertex id
      * @return true if and only if the two vertexes exists and are connected
      */
     fun adjacent(
-        firstVertex: Vertex,
-        secondVertex: Vertex,
+        firstVertexId: Int,
+        secondVertexId: Int,
     ): Boolean
 
     /**
@@ -29,7 +27,6 @@ interface GraphFunctions {
 
     /**
      * Add edge to graph
-     * @param startingVertex is starting vertex
      * @param path is file path
      * @return true if operation was successful
      */

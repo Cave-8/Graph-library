@@ -6,7 +6,7 @@ import nodeAndEdges.Vertex
 /**
  * Contains matrix, first row and column contain indices and every Matrix[i,j] contains weight of arch connecting i -> j, if it doesn't exist -1 is shown
  */
-class AdjacencyMatrix(var Vertexes: ArrayList<Vertex>, var Edges: ArrayList<Edge>) {
+class AdjacencyMatrix(private var Vertexes: ArrayList<Vertex>, private var Edges: ArrayList<Edge>) {
 
     var matrix = Matrix(Vertexes.size + 1, Vertexes.size + 1)
 
@@ -14,8 +14,8 @@ class AdjacencyMatrix(var Vertexes: ArrayList<Vertex>, var Edges: ArrayList<Edge
      * Fill Matrix with Vertexes and Edges lists
      */
     fun fillMatrix () {
-        var i: Int = 0
-        var j: Int = 0
+        var i = 0
+        var j = 0
 
         //Filling first row
         while (j < Vertexes.size) {
@@ -60,8 +60,8 @@ class AdjacencyMatrix(var Vertexes: ArrayList<Vertex>, var Edges: ArrayList<Edge
      */
     fun printMatrix() {
 
-        var i: Int = 0
-        var j: Int = 0
+        var i = 0
+        var j = 0
 
         while (i < Vertexes.size + 1) {
             while (j < Vertexes.size + 1) {

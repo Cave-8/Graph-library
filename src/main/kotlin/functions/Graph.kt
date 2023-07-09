@@ -7,16 +7,32 @@ import nodeAndEdges.Vertex
 /**
  * Graph utilities
  */
-class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, var adjMat: AdjacencyMatrix) : GraphFunctions {
+class Graph(private val vertexes: ArrayList<Vertex>, private val edges: ArrayList<Edge>, var adjMat: AdjacencyMatrix) : GraphFunctions {
 
     /**
      * Check if two vertexes are connected
-     * @param firstVertex is the first vertex
-     * @param secondVertex is the second vertex
+     * @param firstVertexId is the first vertex id
+     * @param secondVertexId is the second vertex id
      * @return true if and only if the two vertexes exists and are connected
      */
-    override fun adjacent(firstVertex: Vertex, secondVertex: Vertex): Boolean {
-        TODO("Not yet implemented")
+    override fun adjacent(firstVertexId: Int, secondVertexId: Int): Boolean {
+
+        if (vertexes.map { e -> e.id }.contains(firstVertexId)) {
+            println("First vertex doesn't exist")
+            return false
+        }
+        if (vertexes.map { e -> e.id }.contains(secondVertexId)) {
+            println("Second vertex doesn't exist")
+            return false
+        }
+
+        return if (adjMat.matrix[firstVertexId, secondVertexId] != -1) {
+            println("Vertexes are connected with weight ${adjMat.matrix[firstVertexId, secondVertexId]}")
+            true
+        } else {
+            println("Vertexes are not connected")
+            false
+        }
     }
 
     /**
@@ -77,6 +93,11 @@ class Graph(val vertexes: ArrayList<Vertex>, val edges: ArrayList<Edge>, var adj
 
             if (!vertexes.map{e -> e.id}.contains(idE)) {
                 println("Vertex doesn't exists")
+                return false
+            }
+
+            if (edges.firstOrNull { e -> e.startingVertexId == idS && e.endingVertexId == idE } != null) {
+                println("These vertexes are already connected")
                 return false
             }
 

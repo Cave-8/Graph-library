@@ -43,11 +43,12 @@ fun main() {
         println("1: Print graph")
         println("2: Add vertex")
         println("3: Add edge")
-        println("4: Find shortest path between two vertexes")
-        println("5: Exit")
+        println("4: Find if two vertexes are connected")
+        println("5: Find shortest path between two vertexes")
+        println("6: Find if an eulerian path exists and eventually print it")
+        println("7: Exit")
 
-        val choice: Int = Integer.valueOf(readln())
-        when (choice) {
+        when (Integer.valueOf(readln())) {
             1 -> {
                 appGraph.adjMat.printMatrix()
             }
@@ -58,9 +59,28 @@ fun main() {
                 appGraph.addEdge(path)
             }
             4 -> {
+                try {
+                    println("Insert id of starting vertex")
+                    println(">")
+                    val firstId = Integer.valueOf(readln())
+                    println("Insert id of ending vertex")
+                    println(">")
+                    val secondId = Integer.valueOf(readln())
 
+                    appGraph.adjacent(firstId, secondId)
+                }
+                catch (e: NumberFormatException)
+                {
+                    println("Please insert a valid number")
+                }
             }
             5 -> {
+
+            }
+            6 -> {
+
+            }
+            7 -> {
                 println("Goodbye!")
                 exitProcess(0)
             }
