@@ -11,4 +11,4 @@ You can:
 - Find shortest path between two vertices
 
 # Usage
-You can directly download jar in root folder and run it with `java -jar GraphLibrary.jar`, be sure to download the latest version of java.
+You can directly download jar in root folder and run it with `java -jar GraphLibrary.jar`, be sure to download the latest version of Java.
