@@ -128,4 +128,22 @@ class Graph(private val vertexes: ArrayList<Vertex>, private val edges: ArrayLis
         }
         return true
     }
+
+    /**
+     * Check if an eulerian path exists and eventually print it
+     * @param graph is analyzed graph
+     * @return true if eulerian path exists, otherwise it returns false
+     */
+    override fun ePath(graph: Graph): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    /**
+     * Print shortest path between two vertexes
+     * @param startingVertexId is id of starting vertex
+     * @param endingVertexId is id of ending vertex
+     */
+    override fun shortestPath(startingVertexId: Int, endingVertexId: Int) {
+        TODO("Not yet implemented")
+    }
 }

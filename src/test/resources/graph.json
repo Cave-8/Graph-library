@@ -1,38 +1,53 @@
 {
-  "vertexesList": [{
-    "vertex0" : {
+  "vertexesList": [
+    {
       "id" : "0"
     },
-    "vertex1" : {
+    {
       "id" : "1"
     },
-    "vertex2" : {
+    {
       "id" : "2"
     },
-    "vertex3" : {
+    {
       "id" : "3"
     }
-  }],
-  "edgesList": [{
-    "edge0" : {
-      "startingVertex" : "0",
-      "endingVertex" : "1",
+  ],
+  "edgesList": [
+    {
+      "startingVertexId" : "0",
+      "endingVertexId" : "1",
       "weight" : "1"
     },
-    "edge1" : {
-      "startingVertex" : "1",
-      "endingVertex" : "0",
+    {
+      "startingVertexId" : "1",
+      "endingVertexId" : "0",
       "weight" : "3"
     },
-    "edge2" : {
-      "startingVertex" : "3",
-      "endingVertex" : "3",
+    {
+      "startingVertexId" : "3",
+      "endingVertexId" : "3",
       "weight" : "1"
     },
-    "edge3" : {
-      "startingVertex" : "2",
-      "endingVertex" : "0",
-      "weight" : "0"
+    {
+      "startingVertexId" : "2",
+      "endingVertexId" : "0",
+      "weight" : "5"
+    },
+    {
+      "startingVertexId" : "0",
+      "endingVertexId" : "0",
+      "weight" : "1"
+    },
+    {
+      "startingVertexId" : "3",
+      "endingVertexId" : "2",
+      "weight" : "8"
+    },
+    {
+      "startingVertexId" : "1",
+      "endingVertexId" : "1",
+      "weight" : "1"
     }
-  }]
+  ]
 }

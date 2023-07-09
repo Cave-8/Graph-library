@@ -15,3 +15,4 @@ gradle/
 /gradlew.bat
 /settings.gradle.kts
 /build.gradle.kts
+/build

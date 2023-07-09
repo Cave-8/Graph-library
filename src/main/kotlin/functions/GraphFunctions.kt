@@ -33,4 +33,23 @@ interface GraphFunctions {
     fun addEdge (
         path: String
     ): Boolean
+
+    /**
+     * Check if an eulerian path exists and eventually print it
+     * @param graph is analyzed graph
+     * @return true if eulerian path exists, otherwise it returns false
+     */
+    fun ePath (
+        graph: Graph
+    ): Boolean
+
+    /**
+     * Print shortest path between two vertexes
+     * @param startingVertexId is id of starting vertex
+     * @param endingVertexId is id of ending vertex
+     */
+    fun shortestPath(
+        startingVertexId: Int,
+        endingVertexId: Int
+    )
 }
