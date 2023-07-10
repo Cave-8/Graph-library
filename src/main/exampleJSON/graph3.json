@@ -1,0 +1,138 @@
+{
+  "verticesList": [
+    {
+      "id": "1"
+    },
+    {
+      "id": "2"
+    },
+    {
+      "id": "3"
+    },
+    {
+      "id": "4"
+    },
+    {
+      "id": "5"
+    },
+    {
+      "id": "6"
+    },
+    {
+      "id": "7"
+    },
+    {
+      "id": "8"
+    },
+    {
+      "id": "9"
+    }
+  ],
+  "edgesList": [
+    {
+      "startingVertexId": "1",
+      "endingVertexId": "2",
+      "weight": "8"
+    },
+    {
+      "startingVertexId": "1",
+      "endingVertexId": "3",
+      "weight": "3"
+    },
+    {
+      "startingVertexId": "1",
+      "endingVertexId": "6",
+      "weight": "13"
+    },
+    {
+      "startingVertexId": "2",
+      "endingVertexId": "3",
+      "weight": "2"
+    },
+    {
+      "startingVertexId": "2",
+      "endingVertexId": "4",
+      "weight": "1"
+    },
+    {
+      "startingVertexId": "3",
+      "endingVertexId": "2",
+      "weight": "3"
+    },
+    {
+      "startingVertexId": "3",
+      "endingVertexId": "4",
+      "weight": "9"
+    },
+    {
+      "startingVertexId": "3",
+      "endingVertexId": "5",
+      "weight": "2"
+    },
+    {
+      "startingVertexId": "4",
+      "endingVertexId": "8",
+      "weight": "2"
+    },
+    {
+      "startingVertexId": "4",
+      "endingVertexId": "7",
+      "weight": "6"
+    },
+    {
+      "startingVertexId": "4",
+      "endingVertexId": "5",
+      "weight": "4"
+    },
+    {
+      "startingVertexId": "5",
+      "endingVertexId": "4",
+      "weight": "6"
+    },
+    {
+      "startingVertexId": "5",
+      "endingVertexId": "9",
+      "weight": "4"
+    },
+    {
+      "startingVertexId": "5",
+      "endingVertexId": "6",
+      "weight": "5"
+    },
+    {
+      "startingVertexId": "5",
+      "endingVertexId": "1",
+      "weight": "5"
+    },
+    {
+      "startingVertexId": "6",
+      "endingVertexId": "9",
+      "weight": "7"
+    },
+    {
+      "startingVertexId": "6",
+      "endingVertexId": "7",
+      "weight": "1"
+    },
+    {
+      "startingVertexId": "7",
+      "endingVertexId": "5",
+      "weight": "3"
+    },
+    {
+      "startingVertexId": "7",
+      "endingVertexId": "8",
+      "weight": "4"
+    },
+    {
+      "startingVertexId": "8",
+      "endingVertexId": "9",
+      "weight": "1"
+    },
+    {
+      "startingVertexId": "9",
+      "endingVertexId": "7",
+      "weight": "5"
+    }
+  ]
+}

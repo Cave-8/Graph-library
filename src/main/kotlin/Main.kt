@@ -79,7 +79,19 @@ fun main() {
                 }
             }
             6 -> {
+                try {
+                println("Insert id of starting vertex")
+                println(">")
+                val firstId = Integer.valueOf(readln())
+                println("Insert id of ending vertex")
+                println(">")
+                val secondId = Integer.valueOf(readln())
 
+                  appGraph.shortestPath(firstId, secondId)
+                }catch (e: NumberFormatException)
+                {
+                    println("Please insert a valid number")
+                }
             }
             7 -> {
                 appGraph.eulerianPath()

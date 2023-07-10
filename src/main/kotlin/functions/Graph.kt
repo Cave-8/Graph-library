@@ -36,11 +36,11 @@ class Graph(private val vertices: ArrayList<Vertex>, private val edges: ArrayLis
             safeSecondVertexId = vertices.size }
 
 
-        return if (adjMat.matrix[safeFirstVertexId, safeSecondVertexId] != -1) {
-            println("vertices are connected with weight ${adjMat.matrix[safeFirstVertexId, safeSecondVertexId]}")
+        return if (adjMat.matrix[safeFirstVertexId, safeSecondVertexId] != Int.MIN_VALUE) {
+            println("Vertices are connected with weight ${adjMat.matrix[safeFirstVertexId, safeSecondVertexId]}")
             true
         } else {
-            println("vertices are not connected")
+            println("Vertices are not connected")
             false
         }
     }
@@ -151,9 +151,9 @@ class Graph(private val vertices: ArrayList<Vertex>, private val edges: ArrayLis
         while (i < vertices.size + 1)
         {
             while (j < vertices.size + 1) {
-                if (adjMat.matrix[i, j] != -1) {
-                    list.filter { e -> e.id == adjMat.matrix[i, 0]  }.first().exit++
-                    list.filter { e -> e.id == adjMat.matrix[0, j]  }.first().ent++
+                if (adjMat.matrix[i, j] != Int.MIN_VALUE) {
+                    list.first { e -> e.id == adjMat.matrix[i, 0] }.exit++
+                    list.first { e -> e.id == adjMat.matrix[0, j] }.ent++
                 }
                 j++
             }
@@ -167,20 +167,20 @@ class Graph(private val vertices: ArrayList<Vertex>, private val edges: ArrayLis
 
             val tPath = Stack<Int>()
             val ePath = Stack<Int>()
-            val allvertices = ArrayList<Int> ()
+            val allVertices = ArrayList<Int> ()
             val matrix = adjMat.matrix
 
             for (vee in list) {
                 val outgoing = vee.exit
                 var count = 0
                 while (count < outgoing) {
-                    allvertices.add(vee.id)
+                    allVertices.add(vee.id)
                     count++
                 }
             }
 
-            tPath.push(allvertices.removeAt(0))
-            Hierholzer(tPath, ePath, matrix, allvertices)
+            tPath.push(allVertices.removeAt(0))
+            hierholzer(tPath, ePath, matrix, allVertices)
         }
         else if (list.count { e -> e.ent - e.exit == 1 } == 1 && list.count { e -> e.ent - e.exit == -1 } == 1)
         {
@@ -188,19 +188,19 @@ class Graph(private val vertices: ArrayList<Vertex>, private val edges: ArrayLis
 
             val tPath = Stack<Int>()
             val ePath = Stack<Int>()
-            val allvertices = ArrayList<Int> ()
+            val allVertices = ArrayList<Int> ()
             val matrix = adjMat.matrix
 
             for (vee in list) {
                 val outgoing = vee.exit
                 var count = 0
                 while (count < outgoing) {
-                    allvertices.add(vee.id)
+                    allVertices.add(vee.id)
                     count++
                 }
             }
-            tPath.push(allvertices.removeAt(allvertices.indexOf(list.filter{e -> e.ent - e.exit == -1}.map { e -> e.id }.first())))
-            Hierholzer(tPath, ePath, matrix, allvertices)
+            tPath.push(allVertices.removeAt(allVertices.indexOf(list.filter{e -> e.ent - e.exit == -1}.map { e -> e.id }.first())))
+            hierholzer(tPath, ePath, matrix, allVertices)
         }
         else
             println("An eulerian path doesn't exist")
@@ -209,13 +209,90 @@ class Graph(private val vertices: ArrayList<Vertex>, private val edges: ArrayLis
     }
 
     /**
+     * Print shortest path between two vertices (Dijkstra)
+     * @param startingVertexId is id of starting vertex
+     * @param endingVertexId is id of ending vertex
+     */
+    override fun shortestPath(startingVertexId: Int, endingVertexId: Int) {
+        val unvisited = HashSet<Int>()
+        val distance = HashMap<Int, Int>()
+        val prev = HashMap<Int, Int>()
+        val finalPath = Stack<Int>()
+
+        for (v in vertices) {
+            unvisited.add(v.id)
+            distance[v.id] = if (v.id == startingVertexId) 0 else Int.MAX_VALUE
+            prev[v.id] = 0
+        }
+        var curr = startingVertexId
+        var next = curr
+        var minDist = Int.MAX_VALUE
+
+
+        while (unvisited.isNotEmpty()) {
+
+            val neighbours = edges.filter{e -> e.startingVertexId == curr && unvisited.contains(e.endingVertexId)}
+
+            for (n in neighbours) {
+                if (distance[n.endingVertexId]!! > n.weight + distance[curr]!!) {
+                    distance[n.endingVertexId] = n.weight + distance[curr]!!
+                    prev[n.endingVertexId] = curr
+                }
+                if (minDist >= distance[n.endingVertexId]!!) {
+                    minDist = distance[n.endingVertexId]!!
+                }
+            }
+
+            var min = Int.MAX_VALUE
+            unvisited.remove(curr)
+
+            for (u in unvisited) {
+                min = if(distance[u]!! <= min) distance[u]!! else min
+
+                if (distance[u] == min)
+                    next = u
+            }
+
+            if (curr == endingVertexId)
+            {
+                var backTrack = endingVertexId
+                finalPath.push(backTrack)
+                while (backTrack != startingVertexId) {
+                    finalPath.push(prev[backTrack])
+                    backTrack = prev[backTrack]!!
+                }
+
+                println("Shortest path is: ")
+                while (finalPath.isNotEmpty())
+                {
+                    if (finalPath.size != 1)
+                        print ("${finalPath.pop()} -> ")
+                    else
+                        println("${finalPath.pop()}")
+                }
+                println("With a total weight of ${distance[curr]}")
+                return
+            }
+
+            if (min == Int.MAX_VALUE)
+            {
+                println("Vertex is unreachable")
+                return
+            }
+
+            curr = next
+            minDist = Int.MAX_VALUE
+        }
+    }
+
+    /**
      * Hierholzer's algorithm
      * @param tPath
      * @param ePath
      * @param matrix is adjacency matrix
-     * @param allvertices contains id of vertices
+     * @param allVertices contains id of vertices
      */
-    fun Hierholzer (tPath: Stack<Int>, ePath: Stack<Int>, matrix: Matrix, allvertices: ArrayList<Int>) {
+    private fun hierholzer (tPath: Stack<Int>, ePath: Stack<Int>, matrix: Matrix, allVertices: ArrayList<Int>) {
         while (tPath.isNotEmpty()) {
             val curr = tPath.peek()
             var row = 1
@@ -228,10 +305,10 @@ class Graph(private val vertices: ArrayList<Vertex>, private val edges: ArrayLis
             }
 
             while (col < vertices.size + 1) {
-                if (matrix[row, col] != -1) {
-                    matrix[row, col] = -1
+                if (matrix[row, col] != Int.MIN_VALUE) {
+                    matrix[row, col] = Int.MIN_VALUE
                     tPath.push(matrix[0, col])
-                    try {allvertices.removeAt(allvertices.indexOf(matrix[0, col]))} catch (_: IndexOutOfBoundsException) {}
+                    try {allVertices.removeAt(allVertices.indexOf(matrix[0, col]))} catch (_: IndexOutOfBoundsException) {}
                     break
                 }
                 if (col == vertices.size) {
@@ -252,14 +329,5 @@ class Graph(private val vertices: ArrayList<Vertex>, private val edges: ArrayLis
             else
                 println()
         }
-    }
-
-    /**
-     * Print shortest path between two vertices
-     * @param startingVertexId is id of starting vertex
-     * @param endingVertexId is id of ending vertex
-     */
-    override fun shortestPath(startingVertexId: Int, endingVertexId: Int) {
-        TODO("Not yet implemented")
     }
 }
